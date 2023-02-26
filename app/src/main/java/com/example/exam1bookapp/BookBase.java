@@ -19,6 +19,7 @@ public class BookBase {
     public static final String BOOK_DESC_3 = "bookDesc3";
 
     private static final String COUNT = "countBooks";
+    private static final String COUNT_MAX = "countBooksMax";
 
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
@@ -29,29 +30,38 @@ public class BookBase {
     }
 
     public void setBook(BookData bookData) {
-        if (getCountBooks() == 0) {
+        if (getCountMax() == 0 || getCountBooks() == 0) {
             editor.putString(BOOK_NAME_1, bookData.getName()).apply();
             editor.putString(BOOK_AUTHOR_1, bookData.getAuthor()).apply();
             editor.putString(BOOK_DESC_1, bookData.getDescription()).apply();
-            editor.putInt(COUNT, 1).apply();
 
-        } else if (getCountBooks() == 1) {
+            editor.putInt(COUNT_MAX, 1).apply();
+            editor.putInt(COUNT, getCountBooks() + 1).apply();
+
+        } else if (getCountMax() == 1 || getCountBooks() == 1) {
             editor.putString(BOOK_NAME_2, bookData.getName()).apply();
             editor.putString(BOOK_AUTHOR_2, bookData.getAuthor()).apply();
             editor.putString(BOOK_DESC_2, bookData.getDescription()).apply();
-            editor.putInt(COUNT, 2).apply();
 
-        } else if (getCountBooks() == 2) {
+            editor.putInt(COUNT_MAX, 2).apply();
+            editor.putInt(COUNT, getCountBooks() + 1).apply();
+
+        } else if (getCountMax() == 2 || getCountBooks() == 2) {
             editor.putString(BOOK_NAME_3, bookData.getName()).apply();
             editor.putString(BOOK_AUTHOR_3, bookData.getAuthor()).apply();
             editor.putString(BOOK_DESC_3, bookData.getDescription()).apply();
-            editor.putInt(COUNT, 3).apply();
 
+            editor.putInt(COUNT_MAX, 0).apply();
+            editor.putInt(COUNT, getCountBooks() + 1).apply();
         }
     }
 
     public int getCountBooks() {
         return pref.getInt(COUNT, 0);
+    }
+
+    public int getCountMax() {
+        return pref.getInt(COUNT_MAX, 0);
     }
 
     // Barcha book name larini olish

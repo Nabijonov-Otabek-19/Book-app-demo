@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchScreen() {
-
         if (bookBase.getCountBooks() == 0) {
             no_book.setVisibility(View.VISIBLE);
             yes_book.setVisibility(View.INVISIBLE);
@@ -89,13 +88,18 @@ public class MainActivity extends AppCompatActivity {
             yes_book.setVisibility(View.VISIBLE);
             setBook1();
 
+            book2.setVisibility(View.INVISIBLE);
+            book3.setVisibility(View.INVISIBLE);
+
         } else if (bookBase.getCountBooks() == 2) {
             no_book.setVisibility(View.INVISIBLE);
             yes_book.setVisibility(View.VISIBLE);
             setBook1();
             setBook2();
 
-        } else if (bookBase.getCountBooks() == 3) {
+            book3.setVisibility(View.INVISIBLE);
+
+        } else if (bookBase.getCountBooks() > 2) {
             no_book.setVisibility(View.INVISIBLE);
             yes_book.setVisibility(View.VISIBLE);
 
@@ -109,17 +113,12 @@ public class MainActivity extends AppCompatActivity {
         book1.setVisibility(View.VISIBLE);
         bookName1.setText(bookBase.getBookName1());
         bookAuthor1.setText(bookBase.getBookAuthor1());
-
-        book2.setVisibility(View.INVISIBLE);
-        book3.setVisibility(View.INVISIBLE);
     }
 
     private void setBook2() {
         book2.setVisibility(View.VISIBLE);
         bookName2.setText(bookBase.getBookName2());
         bookAuthor2.setText(bookBase.getBookAuthor2());
-
-        book3.setVisibility(View.INVISIBLE);
     }
 
     private void setBook3() {
