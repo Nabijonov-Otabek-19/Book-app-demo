@@ -26,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         launchScreen();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
     private void loadView() {
         no_book = findViewById(R.id.ll_no_book);
         yes_book = findViewById(R.id.ll_yes_book);
